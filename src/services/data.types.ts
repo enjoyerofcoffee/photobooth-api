@@ -13,20 +13,21 @@ export const EQUIPMENT_SLOTS = [
   "JAW",
 ] as const;
 
+export const SLOT_TYPE = ['ITEM','KITEN'] as const
+
 export type EquipmentSlot = (typeof EQUIPMENT_SLOTS)[number];
 
-export interface SlotEntry {
+export type SlotEntry = {
   type: "ITEM" | "KIT";
   id: number;
 }
 
-export interface Appearance {
-  schemaVersion: 1;
-  displayName: string;
-  gender: 0 | 1;
-  equipment: Partial<Record<EquipmentSlot, SlotEntry>>;
-  bodyColors: [number, number, number, number, number];
-  npcTransformId: number | null;
-  idlePoseAnimation: number | null;
+export type Appearance = {
+  displayName: string,
+  gender: 0 | 1,
+  equipment: {
+    type: EquipmentSlot, id: number,
+  }
+  bodyColors: [number,number,number,number,number]
   capturedAt: string; // ISO-8601 UTC
 }

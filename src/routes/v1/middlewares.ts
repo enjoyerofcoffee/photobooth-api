@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { usernameSchema } from "../../validators/username";
+import { appearanceSchema, usernameSchema } from "../../validators/username";
 
 export const validateUsername = (
   req: Request,
@@ -16,3 +16,15 @@ export const validateUsername = (
 
   next();
 };
+
+export const validateAppearance = (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body
+
+  const result = appearanceSchema.validate(body);
+
+  if (result.error) {
+    return res.send(result.error);
+  }
+
+  next()
+}
